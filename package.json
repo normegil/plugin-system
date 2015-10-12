@@ -1,0 +1,32 @@
+{
+  "name": "plugin-system",
+  "version": "0.0.1",
+  "description": "Library to help loading plugins from different locations",
+  "main": "index.js",
+  "scripts": {
+    "mocha": "node_modules/mocha/bin/mocha \"test/**/*.js\"",
+    "lint": "node_modules/jshint/bin/jshint lib test && node_modules/jscs/bin/jscs -c test/.jscsrc test && node_modules/jscs/bin/jscs -c .jscsrc lib",
+    "test": "npm run lint && npm run mocha",
+    "push": "npm test && git push && git push --tags && npm publish"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Normegil/plugin-system.git"
+  },
+  "keywords": [
+    "plugin",
+    "plugins",
+    "system",
+    "load",
+    "loading",
+    "loader",
+    "path",
+    "require",
+    "object"
+  ],
+  "author": "Olivier Ory",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Normegil/plugin-system/issues"
+  }
+}
