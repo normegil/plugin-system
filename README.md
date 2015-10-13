@@ -48,6 +48,6 @@ The callback will contain any error (`err`) that has happened during the process
 ### Loading process
 The paths will be processed separately, and will load the plugins (using `require()`) like this:
 
-- Load every file ending with .js (using '/.+\.js$/' regex)
+- Load every file ending with .js (using `/.+\.js$/` regex)
 - Load every folder containing index.js with a `require(pathToFolder)`
 - Search every sub-folder (with no index.js) for other plugins.
