@@ -1,0 +1,33 @@
+{
+  "preset"                                        :  "node-style-guide",
+
+  "disallowQuotedKeysInObjects"                   :  "allButReserved",
+	"disallowMultipleVarDecl"                       :  "strict",
+  "requireCapitalizedComments"                    :  null,
+
+  "requireSpaceBeforeKeywords"                    :  ["else", "catch"],
+  "disallowAnonymousFunctions"                    :  true,
+  "disallowEmptyBlocks"                           :  true,
+  "disallowMultipleLineBreaks"                    :  true,
+  "disallowMultipleLineStrings"                   :  true,
+  "disallowMultipleSpaces"                        :  true,
+  "disallowMultipleVarDecl"                       :  true,
+  "disallowNewlineBeforeBlockStatements"          :  true,
+  "disallowPaddingNewlinesInBlocks"               :  true,
+  "disallowSpaceBeforePostfixUnaryOperators"      :  true,
+  "disallowSpacesInCallExpression"                :  true,
+  "disallowSpacesInForStatement"                  :  true,
+  "disallowSpacesInsideArrayBrackets"             :  true,
+  "disallowSpacesInsideObjectBrackets"            :  true,
+  "maximumLineLength"                             :  100,
+  "maximumNumberOfLines"                          :  200,
+  "requireBlocksOnNewline"                        :  true,
+  "requireCommaBeforeLineBreak"                   :  true,
+  "requireDotNotation"                            :  true,
+  "requireLineBreakAfterVariableAssignment"       :  true,
+  "requireNamedUnassignedFunctions"               :  true,
+  "requirePaddingNewLinesBeforeExport"            :  true,
+  "requireSemicolons"                             :  true,
+  "requireSpaceBeforeObjectValues"                :  true,
+  "requireYodaConditions"                         :  true
+}

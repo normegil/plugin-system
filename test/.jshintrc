@@ -1,0 +1,14 @@
+{
+	"extends"						:	"../.jshintrc",
+
+	"curly"						:	false,
+	"maxstatements"		:	30,
+	"globals" :	{
+		"describe"			:	false,
+		"before"				:	false,
+		"after"					:	false,
+		"beforeEach"		:	false,
+		"afterEach"			:	false,
+		"it"						:	false
+	}
+}

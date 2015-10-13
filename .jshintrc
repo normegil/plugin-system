@@ -1,0 +1,28 @@
+{
+	"node"						:	true,
+
+	"bitwise"					:	true,
+	"curly"						:	true,
+	"eqeqeq"					:	true,
+	"freeze"					:	true,
+	"funcscope"				:	false,
+	"futurehostile"		:	false,
+	"latedef"					: "nofunc",
+
+	"maxdepth"				:	2,
+	"maxparams"				:	3,
+	"maxstatements"		:	15,
+	"maxcomplexity"		:	5,
+
+	"noarg"						:	true,
+	"nocomma"					:	true,
+	"nonew"						:	true,
+	"singleGroups"		:	true,
+	"strict"					:	true,
+	"undef"						:	true,
+	"unused"					:	true,
+
+	"globals" :	{
+		"requireModule"	:	false
+	}
+}

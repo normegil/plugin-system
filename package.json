@@ -5,9 +5,10 @@
   "main": "index.js",
   "scripts": {
     "mocha": "node_modules/mocha/bin/mocha \"test/**/*.js\"",
-    "lint": "node_modules/jshint/bin/jshint lib test && node_modules/jscs/bin/jscs -c test/.jscsrc test && node_modules/jscs/bin/jscs -c .jscsrc lib",
+    "lint": "node_modules/jshint/bin/jshint index.js test && node_modules/jscs/bin/jscs -c test/.jscsrc test && node_modules/jscs/bin/jscs -c .jscsrc index.js",
     "test": "npm run lint && npm run mocha",
-    "push": "npm test && git push && git push --tags && npm publish"
+    "push": "git push && git push --tags && npm publish",
+    "preversion": "npm test"
   },
   "repository": {
     "type": "git",
@@ -28,5 +29,15 @@
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/Normegil/plugin-system/issues"
+  },
+  "devDependencies": {
+    "chai": "^3.3.0",
+    "jscs": "^2.3.0",
+    "jshint": "^2.8.0",
+    "mocha": "^2.3.3"
+  },
+  "dependencies": {
+    "async": "^1.4.2",
+    "underscore": "^1.8.3"
   }
 }
