@@ -4,9 +4,9 @@
   "description": "Library to help loading plugins from different locations",
   "main": "index.js",
   "scripts": {
-    "mocha": "node_modules/mocha/bin/mocha \"test/**/*.js\"",
+    "unit-test": "node_modules/tape/bin/tape \"test/**/*.js\" | node_modules/faucet/bin/cmd.js",
     "lint": "node_modules/jshint/bin/jshint index.js test && node_modules/jscs/bin/jscs -c test/.jscsrc test && node_modules/jscs/bin/jscs -c .jscsrc index.js",
-    "test": "npm run lint && npm run mocha",
+    "test": "npm run lint && npm run unit-test",
     "push": "git push && git push --tags && npm publish",
     "preversion": "npm test"
   },
@@ -32,13 +32,13 @@
   },
   "homepage": "https://github.com/Normegil/plugin-system#readme",
   "devDependencies": {
-    "chai": "^3.3.0",
+    "faucet": "0.0.1",
     "jscs": "^2.3.0",
     "jshint": "^2.8.0",
-    "mocha": "^2.3.3"
+    "tape": "^4.2.2"
   },
   "dependencies": {
     "async": "^1.4.2",
-    "underscore": "^1.8.3"
+    "lodash": "^3.10.1"
   }
 }
