@@ -30,6 +30,7 @@
   "bugs": {
     "url": "https://github.com/Normegil/plugin-system/issues"
   },
+  "homepage": "https://github.com/Normegil/plugin-system#readme",
   "devDependencies": {
     "chai": "^3.3.0",
     "jscs": "^2.3.0",

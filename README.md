@@ -13,7 +13,7 @@ npm install plugin-system
 `
 
 ## Usage
-The library will send back a function to use like this (More [examples](https://github.com/Normegil/multi-configure/tree/develop/examples)):
+The library will send back a function to use like this:
 ```javascript
 var loadPlugins = require('plugin-system');
 loadPlugins(
