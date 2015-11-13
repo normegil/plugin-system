@@ -1,74 +1,79 @@
 'use strict';
 
-var fs = require('fs');
-var async = require('async');
-var _ = require('lodash');
+let fs = require('fs');
+let _ = require('lodash');
 
-module.exports = function loadPlugins(pluginOpts, callback) {
-  var paths = pluginOpts.paths;
-  var custom = pluginOpts.custom;
+module.exports = function loadPlugins(pluginOpts) {
+  return new Promise(function loadPlugins(resolve, reject) {
+    let paths = pluginOpts.paths;
+    let custom = pluginOpts.custom;
 
-  var plugins = [];
-  if (undefined !== custom && null !== custom && 0 < custom.length) {
-    plugins = custom;
-  }
-  if (undefined === paths || null === paths) {
-    return callback(null, removeWrongPlugins(plugins));
-  }
-
-  async.map(
-    paths,
-    loadPluginsFromPath,
-    function onLoaded(err, results) {
-      if (err) {
-        return callback(err);
-      }
-      var flatResults = _.flatten(results);
-      plugins = _.union(plugins, flatResults);
-      return callback(null, removeWrongPlugins(plugins));
+    let plugins = [];
+    if (undefined !== custom && null !== custom && 0 < custom.length) {
+      plugins = custom;
     }
-  );
+    if (undefined === paths || null === paths) {
+      return resolve(removeWrongPlugins(plugins));
+    }
+
+    let loadPluginsFromPaths = paths.map(function toPromises(path) {
+      return loadPluginsFromPath(path);
+    });
+    Promise.all(loadPluginsFromPaths)
+      .then(function onLoad(results) {
+        let flatResults = _.flatten(results);
+        plugins = _.union(plugins, flatResults);
+        resolve(removeWrongPlugins(plugins));
+      })
+      .catch(reject);
+  });
 };
 
-function loadPluginsFromPath(path, callback) {
-  fs.readdir(path, function onRead(err, files) {
-    if (err) {
-      return callback(err);
-    }
-
-    async.map(
-      files,
-      function loadFile(file, asyncCallback) {
-        loadPlugin(path + file, asyncCallback);
-      },
-      function onLoaded(err, plugins) {
-        return callback(err, _.flatten(plugins));
+function loadPluginsFromPath(path) {
+  return new Promise(function loadPluginsFromPath(resolve, reject) {
+    fs.readdir(path, function onRead(err, files) {
+      if (err) {
+        return reject(err);
       }
-    );
+
+      let promises = files.map(function toPromises(file) {
+        return loadPlugin(path + file);
+      });
+
+      Promise.all(promises)
+        .then(function onSuccess(plugins) {
+          resolve(_.flatten(plugins));
+        })
+        .catch(reject);
+    });
   });
 }
 
-function loadPlugin(filePath, callback) {
-  fs.stat(filePath, function onStat(err, stat) {
-    if (err) {
-      return callback(err);
-    }
-    if (!stat.isDirectory()) {
-      var regex = /.+\.js$/i;
-      if (filePath.match(regex)) {
-        return callback(null, require(filePath));
-      }
-      return callback(null, null);
-    }
-    fs.stat(filePath + '/index.js', function onIndexStat(err) {
+function loadPlugin(filePath) {
+  return new Promise(function loadPlugin(resolve, reject) {
+    fs.stat(filePath, function onStat(err, stat) {
       if (err) {
-        if ('ENOENT' === err.code) {
-          return loadPluginsFromPath(filePath + '/', callback);
-        }
-        return callback(err);
+        reject(err);
       }
-      var folderRequired = require(filePath);
-      return callback(null, folderRequired);
+      if (!stat.isDirectory()) {
+        let regex = /.+\.js$/i;
+        if (filePath.match(regex)) {
+          return resolve(require(filePath));
+        }
+        return resolve(null);
+      }
+      fs.stat(filePath + '/index.js', function onIndexStat(err) {
+        if (err) {
+          if ('ENOENT' === err.code) {
+            return loadPluginsFromPath(filePath + '/')
+              .then(resolve)
+              .catch(reject);
+          }
+          return reject(err);
+        }
+        let plugin = require(filePath);
+        return resolve(plugin);
+      });
     });
   });
 }

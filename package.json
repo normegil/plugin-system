@@ -38,7 +38,6 @@
     "tape": "^4.2.2"
   },
   "dependencies": {
-    "async": "^1.4.2",
     "lodash": "^3.10.1"
   }
 }
