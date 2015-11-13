@@ -6,6 +6,9 @@ Library (for NodeJS) designed to load plugins from given folders, and from objec
 - Load plugins from given objects, ...
 - Can handle mutiple paths
 
+## Requirements
+- Node supporting ES6 options ([v4.2](https://github.com/nodejs/node/releases/tag/v4.2.0) or higher) 
+
 ## Installation
 To install the library, just use [npm](https://fr.wikipedia.org/wiki/Npm_%28logiciel%29):
 `
@@ -33,17 +36,19 @@ loadPlugins(
         name: 'MyPlugin3',
       }
     ],
-  },
-  function callback(err, plugins) {
-    // plugins is an array of all the plugins loaded (using require on file/folders & merge with the custom plugins given)
-  });
+  })
+    .then(function onSuccess(plugins) {
+        // plugins is an array of all the plugins loaded (using require on file/folders & merge with the custom plugins given)
+    })
+    .catch(function onError(err) {
+    })
 ```
 The configuration object take two arrays:
 
 - `paths`: all the path to check. It will search through the path and the full hierarchy.
 - `custom`: A collection of your custom plugins, defined as function/object/...
 
-The callback will contain any error (`err`) that has happened during the process, and `plugins` will be an array of your plugins.
+The promise will send any error (`err`) that has happened during the process, and `plugins` will be an array of your plugins.
 
 ### Loading process
 The paths will be processed separately, and will load the plugins (using `require()`) like this:
