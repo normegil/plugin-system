@@ -38,6 +38,7 @@
     "tape": "^4.2.2"
   },
   "dependencies": {
-    "lodash": "^3.10.1"
+    "lodash": "^3.10.1",
+    "log-wrapper": "^0.1.1"
   }
 }
